@@ -16,7 +16,7 @@
   "main": "index.js",
   "name": "gitbook-plugin-blackbeard",
   "scripts": {},
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/blackbeardjs/gitbook-plugin-blackbeard.git"
