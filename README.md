@@ -1,25 +1,26 @@
-## plugin-github
+## Blackbeard.js GitBook plugin
 
-Display a link to your GitHub repo in your gitbook.
+This is a plugin used to write the Blackbeard.js documentation. It adds a few things to the original markdown syntax:
 
-### Usage
 
-Put this in your book.json:
-
-```js
-{
-    "plugins": [ "github" ],
-    "pluginsConfig": {
-        "github": {
-            "url": "https://github.com/your/repo"
-        }
-    }
-}
+... a table of contents, automatically generated from the headlines in the document:
+```
+<!--- toc --->
 ```
 
-And you're done!
+... support badges:
+```
+<!-- support:<ios (0-4)>:<android (0-4)>:<windows (0-4)> -->
+```
 
-### Credits
+... stability level blocks:
+```
+<!-- stability:<0-4> -->
+```
 
-Original work by [@mjackson](https://github.com/mjackson).
+... stability level boxes:
+```
+<!-- stability-level:<0-4> -->
+```
 
+It also allows for easy referencing to headlines in the document (or standard JavaScript objects), without having to maintain a reference list at the bottom.
