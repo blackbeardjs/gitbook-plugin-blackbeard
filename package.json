@@ -6,7 +6,9 @@
     "slug": "^0.9.1"
   },
   "description": "Blackbeard documentation plugin for Gitbook",
-  "devDependencies": {},
+  "devDependencies": {
+    "marked": "^0.3.5"
+  },
   "directories": {},
   "engines": {
     "gitbook": ">=2.5.0"

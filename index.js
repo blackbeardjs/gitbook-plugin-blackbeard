@@ -1,8 +1,7 @@
 "use strict";
 
-let references = {};
+let configRefs = {};
 
-const slug   = require("slug");
 const path   = require("path");
 
 const utils  = require("./lib/utils");
@@ -25,10 +24,13 @@ const stabilities = {
 
 // (^#+)\s(.+)$
 module.exports = {
-    book: {},
     hooks: {
+        init: function() {
+            configRefs = this.options.pluginsConfig.references || {}
+        },
+
         "page:before": function(page) {
-            const frontpageLink = "/" + require("path").relative(page.path, "docs");
+            const frontpageLink = path.relative(path.dirname(page.path), ".");
 
             let content, references;
 
@@ -76,9 +78,14 @@ module.exports = {
             // Finally, add a reference list to the bottom
             content += "\n\n\n";
 
+            for(let key in configRefs) {
+                references[key] = path.relative(path.dirname(page.path), path.dirname(configRefs[key]));
+                references[key] = path.join(references[key], path.basename(configRefs[key]));
+            }
+
             for(let key in references) {
                 let link = references[key];
-                    link = link.indexOf("/") !== -1 ? link : `#${link}`;
+                    link = link.indexOf("/") !== -1 || link.indexOf(".html") !== -1 ? link : `#${link}`;
 
                 content += `[\`${key}\`]: ${link}\n`;
             }
