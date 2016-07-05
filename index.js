@@ -79,8 +79,12 @@ module.exports = {
             content += "\n\n\n";
 
             for(let key in configRefs) {
-                references[key] = path.relative(path.dirname(page.path), path.dirname(configRefs[key]));
-                references[key] = path.join(references[key], path.basename(configRefs[key]));
+                if (configRefs[key].indexOf("://")) {
+                    references[key] = configRefs[key];
+                } else {
+                    references[key] = path.relative(path.dirname(page.path), path.dirname(configRefs[key]));
+                    references[key] = path.join(references[key], path.basename(configRefs[key]));
+                }
             }
 
             for(let key in references) {
