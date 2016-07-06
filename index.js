@@ -47,11 +47,13 @@ module.exports = {
             // Replace text references to headlines and standard JS objects
             content = content.replace(/(^[^#|[\s\*].+)(.*)/gmi, ($0, $1, $2) => {
                 return $1.replace(/([^\[.]|^)`([\w|\.]+)`/gmi, ($0, $1, $2) => {
-                    if (references[$2]) {
-                        return ` [\`${$2}\`][]`;
+                    const normalized = utils.normalize($2);
+
+                    if (references[normalized]) {
+                        return ` [\`${normalized}\`][]`;
                     }
 
-                    return ` \`${$2}\``;
+                    return ` \`${normalized}\``;
                 })
             });
 
@@ -91,7 +93,7 @@ module.exports = {
                 let link = references[key];
                     link = link.indexOf("/") !== -1 || link.indexOf(".html") !== -1 ? link : `#${link}`;
 
-                content += `[\`${key}\`]: ${link}\n`;
+                content += `[\`${key}\`]: ${link} \r\n`;
             }
 
             page.content = content;
